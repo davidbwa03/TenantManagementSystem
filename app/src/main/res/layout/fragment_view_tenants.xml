@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <layout> as the root turns on Data Binding for this file -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Declare the data this layout can show.
+         "tenant" is a Tenant object (must match your package name) -->
+    <data>
+        <variable
+            name="tenant"
+            type="com.example.tenantmanagementsystem.Tenant" />
+    </data>
+
+    <!-- ScrollView lets the user scroll when the tenant list gets long -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp">
+
+            <!-- "Just added" heading (part of newTenantGroup) -->
+            <TextView
+                android:id="@+id/newTenantLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Just added"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- Shows the tenant that was just added.
+                 @{tenant.summary()} calls summary() in Tenant.kt (Data Binding) -->
+            <TextView
+                android:id="@+id/newTenantTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{tenant.summary()}"
+                android:textSize="16sp"
+                android:padding="16dp"
+                android:background="#E8EEF7"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/newTenantLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Calls the tenant who was just added -->
+            <Button
+                android:id="@+id/callButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CALL TENANT"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/newTenantTextView"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- A Group hides or shows several views with ONE line of code.
+                 It controls the label, the tenant box and the Call button -->
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/newTenantGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="newTenantLabel,newTenantTextView,callButton" />
+
+            <!-- "All tenants" heading.
+                 layout_goneMarginTop="0dp" removes the gap when the group
+                 above is hidden, so this heading moves up to the top -->
+            <TextView
+                android:id="@+id/allTenantsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All tenants"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                app:layout_goneMarginTop="0dp"
+                app:layout_constraintTop_toBottomOf="@id/callButton"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- Holds the text of ALL tenants. Filled in ViewTenantsFragment.kt -->
+            <TextView
+                android:id="@+id/allTenantsTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/allTenantsLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
