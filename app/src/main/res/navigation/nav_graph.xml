@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- The navigation graph is a MAP of all screens and the paths between them.
-     startDestination = the first screen shown (Dashboard) -->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/dashboardFragment">
 
-    <!-- SCREEN 1: Dashboard (start screen) -->
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.example.tenantmanagementsystem.DashboardFragment"
         android:label="Dashboard"
-        tools:layout="@layout/fragment_dashboard">
+        tools:layout="@layout/fragment_dashboard"
+        xmlns:tools="http://schemas.android.com/tools">
 
-        <!-- Arrow: Dashboard to Add Tenant -->
+        <!-- Part D, Step 10: animations -->
         <action
             android:id="@+id/action_dashboardFragment_to_addTenantFragment"
-            app:destination="@id/addTenantFragment" />
-
-        <!-- Arrow: Dashboard to View Tenants -->
+            app:destination="@id/addTenantFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_dashboardFragment_to_viewTenantsFragment"
-            app:destination="@id/viewTenantsFragment" />
+            app:destination="@id/viewTenantsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
-    <!-- SCREEN 2: Add Tenant -->
     <fragment
         android:id="@+id/addTenantFragment"
         android:name="com.example.tenantmanagementsystem.AddTenantFragment"
         android:label="Add Tenant"
-        tools:layout="@layout/fragment_add_tenant">
+        tools:layout="@layout/fragment_add_tenant"
+        xmlns:tools="http://schemas.android.com/tools">
 
-        <!-- Arrow: Add Tenant to View Tenants (after saving) -->
+        <!-- Part D, Step 9: popUpTo so Back from View Tenants lands on the Dashboard -->
         <action
             android:id="@+id/action_addTenantFragment_to_viewTenantsFragment"
-            app:destination="@id/viewTenantsFragment" />
+            app:destination="@id/viewTenantsFragment"
+            app:popUpTo="@id/dashboardFragment" />
     </fragment>
 
-    <!-- SCREEN 3: View Tenants -->
     <fragment
         android:id="@+id/viewTenantsFragment"
         android:name="com.example.tenantmanagementsystem.ViewTenantsFragment"
         android:label="View Tenants"
-        tools:layout="@layout/fragment_view_tenants">
+        tools:layout="@layout/fragment_view_tenants"
+        xmlns:tools="http://schemas.android.com/tools">
 
-        <!-- Data this screen can receive: the tenant just added.
-             nullable + default @null means sending it is OPTIONAL
-             (from the Dashboard there is no new tenant to send).
-             Allowed because Tenant is Serializable -->
+        <!-- Safe Args: the data this screen expects (null when not sent) -->
         <argument
             android:name="newTenant"
             app:argType="com.example.tenantmanagementsystem.Tenant"
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
-
 </navigation>

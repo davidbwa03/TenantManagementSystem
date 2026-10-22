@@ -1,9 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
+    <!-- Base application theme.
+         .NoActionBar is required because our MaterialToolbar is the App Bar -->
     <style name="Base.Theme.TenantManagementSystem" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Customize your theme colours here if you want -->
     </style>
 
+    <!-- This is the name AndroidManifest.xml asks for:
+         android:theme="@style/Theme.TenantManagementSystem" -->
     <style name="Theme.TenantManagementSystem" parent="Base.Theme.TenantManagementSystem" />
+
 </resources>
